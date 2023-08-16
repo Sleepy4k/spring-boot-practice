@@ -34,5 +34,3 @@ CREATE TABLE addresses (
   PRIMARY KEY (id),
   FOREIGN KEY fk_contacts_addresses (contact_id) REFERENCES contacts(id)
 ) ENGINE InnoDB;
-
-DESC addresses;
