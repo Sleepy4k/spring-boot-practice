@@ -1,89 +1,50 @@
 package com.sleepy4k.practice.service;
 
-import java.util.List;
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.ArrayList;
-
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import com.sleepy4k.practice.api.model.User;
+import java.util.Objects;
+
+import com.sleepy4k.practice.entity.User;
+import com.sleepy4k.practice.security.BCrypt;
+import com.sleepy4k.practice.model.UserResponse;
+import com.sleepy4k.practice.model.UpdateUserRequest;
+import com.sleepy4k.practice.repository.UserRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class UserService {
-  private List<User> usersList;
+  @Autowired
+  private UserRepository userRepository;
 
-  public UserService() {
-    usersList = new ArrayList<User>();
+  @Autowired
+  private ValidationService validationService;
 
-    User user1 = new User(1, "John", 20, "john@example.com");
-    User user2 = new User(2, "Jane", 21, "jane@example.com");
-    User user3 = new User(3, "Joe", 22, "joe@example.com");
-    User user4 = new User(4, "Jill", 23, "jill@example.com");
-    User user5 = new User(5, "Jack", 24, "jack@example.com");
-
-    usersList.addAll(Arrays.asList(user1, user2, user3, user4, user5));
+  public UserResponse me(User user) {
+    return UserResponse.builder()
+      .username(user.getUsername())
+      .name(user.getName())
+      .build();
   }
 
-  public List<User> getUser() {
-    return usersList;
-  }
+  @Transactional
+  public UserResponse update(User user, UpdateUserRequest request) {
+    validationService.validate(request);
 
-  public User addUser(User body) {
-    int id = usersList.size() + 1;
-    String name = body.getName();
-    int age = body.getAge();
-    String email = body.getEmail();
-
-    User user = new User(id, name, age, email);
-
-    usersList.add(user);
-
-    return user;
-  }
-
-  public Optional<User> findUser(int id) {
-    Optional<User> optional = Optional.empty();
-
-    for (User user : usersList) {
-      if (user.getId() == id) {
-        optional = Optional.of(user);
-        break;
-      }
+    if (Objects.nonNull(request.getName())) {
+      user.setName(request.getName());
     }
 
-    return optional;
-  }
-
-  public Optional<User> editUser(int id, User body) {
-    Optional<User> optional = Optional.empty();
-
-    for (User user : usersList) {
-      if (user.getId() == id) {
-        user.setName(body.getName());
-        user.setAge(body.getAge());
-        user.setEmail(body.getEmail());
-
-        optional = Optional.of(user);
-        break;
-      }
+    if (Objects.nonNull(request.getPassword())) {
+      user.setPassword(BCrypt.hashpw(request.getPassword(), BCrypt.gensalt()));
     }
 
-    return optional;
-  }
+    userRepository.save(user);
 
-  public Optional<User> deleteUser(int id) {
-    Optional<User> optional = Optional.empty();
-
-    for (User user : usersList) {
-      if (user.getId() == id) {
-        usersList.remove(user);
-
-        optional = Optional.of(user);
-        break;
-      }
-    }
-
-    return optional;
+    return UserResponse.builder()
+      .username(user.getUsername())
+      .name(user.getName())
+      .build();
   }
 }
