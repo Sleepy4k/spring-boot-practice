@@ -5,16 +5,14 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
-import jakarta.validation.constraints.Size;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UpdateUserRequest {
-  @Size(max = 100)
+public class WelcomeResponse {
   private String name;
 
-  @Size(max = 100)
-  private String password;
+  private String version;
+
+  private String description;
 }
