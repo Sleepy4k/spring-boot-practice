@@ -9,8 +9,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sleepy4k.practice.model.AddressResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.sleepy4k.practice.repository.UserRepository;
-import com.sleepy4k.practice.model.CreateAddressRequest;
-import com.sleepy4k.practice.model.UpdateAddressRequest;
+import com.sleepy4k.practice.request.CreateAddressRequest;
+import com.sleepy4k.practice.request.UpdateAddressRequest;
 import com.sleepy4k.practice.repository.AddressRepository;
 import com.sleepy4k.practice.repository.ContactRepository;
 

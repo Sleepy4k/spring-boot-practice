@@ -7,8 +7,8 @@ import com.sleepy4k.practice.entity.User;
 import com.sleepy4k.practice.security.BCrypt;
 import com.sleepy4k.practice.model.WebResponse;
 import com.sleepy4k.practice.model.UserResponse;
-import com.sleepy4k.practice.model.UpdateUserRequest;
 import com.sleepy4k.practice.repository.UserRepository;
+import com.sleepy4k.practice.request.UpdateUserRequest;
 
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;

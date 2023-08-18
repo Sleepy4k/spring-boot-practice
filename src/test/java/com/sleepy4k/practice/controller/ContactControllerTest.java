@@ -9,8 +9,8 @@ import com.sleepy4k.practice.security.BCrypt;
 import com.sleepy4k.practice.model.WebResponse;
 import com.sleepy4k.practice.model.ContactResponse;
 import com.sleepy4k.practice.repository.UserRepository;
-import com.sleepy4k.practice.model.CreateContactRequest;
-import com.sleepy4k.practice.model.UpdateContactRequest;
+import com.sleepy4k.practice.request.CreateContactRequest;
+import com.sleepy4k.practice.request.UpdateContactRequest;
 import com.sleepy4k.practice.repository.ContactRepository;
 
 import org.springframework.http.MediaType;

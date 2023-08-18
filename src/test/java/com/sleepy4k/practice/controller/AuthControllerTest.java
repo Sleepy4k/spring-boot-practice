@@ -7,9 +7,9 @@ import com.sleepy4k.practice.entity.User;
 import com.sleepy4k.practice.security.BCrypt;
 import com.sleepy4k.practice.model.WebResponse;
 import com.sleepy4k.practice.model.TokenResponse;
-import com.sleepy4k.practice.model.LoginUserRequest;
-import com.sleepy4k.practice.model.RegisterUserRequest;
 import com.sleepy4k.practice.repository.UserRepository;
+import com.sleepy4k.practice.request.LoginUserRequest;
+import com.sleepy4k.practice.request.RegisterUserRequest;
 
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
