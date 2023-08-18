@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title th:text="${appName} + ' | Login'">Document</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/auth.css}">
+  </head>
+  <body>
+    <div class="wrapper">
+      <th:block th:replace="partials/body/auth/logo :: body"/>
+
+      <div class="title">
+        <p th:text="'Sign in to ' + ${appName}">Sign in to Our App</p>
+      </div>
+
+      <th:block th:replace="partials/form/login :: body"/>
+
+      <div class="create_act">
+        <p>
+          <span th:text="'New to ' + ${appName} + '?'">Our App</span>
+          <a th:href="@{/register}"> Sign up.</a>
+        </p>
+      </div>
+      <span th:text="${resData}">Our App</span>
+    </div>
+
+    <script th:src="@{/js/login.js}"></script>
+  </body>
+</html>
