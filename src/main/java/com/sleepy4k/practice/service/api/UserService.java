@@ -1,4 +1,4 @@
-package com.sleepy4k.practice.service;
+package com.sleepy4k.practice.service.api;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +7,10 @@ import java.util.Objects;
 
 import com.sleepy4k.practice.entity.User;
 import com.sleepy4k.practice.security.BCrypt;
+import com.sleepy4k.practice.service.ValidationService;
 import com.sleepy4k.practice.model.UserResponse;
-import com.sleepy4k.practice.model.UpdateUserRequest;
 import com.sleepy4k.practice.repository.UserRepository;
+import com.sleepy4k.practice.request.UpdateUserRequest;
 
 import jakarta.transaction.Transactional;
 

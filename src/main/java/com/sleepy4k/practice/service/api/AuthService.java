@@ -1,4 +1,4 @@
-package com.sleepy4k.practice.service;
+package com.sleepy4k.practice.service.api;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -9,10 +9,11 @@ import java.util.UUID;
 
 import com.sleepy4k.practice.entity.User;
 import com.sleepy4k.practice.security.BCrypt;
+import com.sleepy4k.practice.service.ValidationService;
 import com.sleepy4k.practice.model.TokenResponse;
-import com.sleepy4k.practice.model.LoginUserRequest;
-import com.sleepy4k.practice.model.RegisterUserRequest;
 import com.sleepy4k.practice.repository.UserRepository;
+import com.sleepy4k.practice.request.LoginUserRequest;
+import com.sleepy4k.practice.request.RegisterUserRequest;
 
 import jakarta.transaction.Transactional;
 

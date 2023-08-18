@@ -1,4 +1,4 @@
-package com.sleepy4k.practice.service;
+package com.sleepy4k.practice.service.api;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,10 +18,11 @@ import org.springframework.web.server.ResponseStatusException;
 import com.sleepy4k.practice.entity.User;
 import com.sleepy4k.practice.entity.Contact;
 import com.sleepy4k.practice.model.ContactResponse;
-import com.sleepy4k.practice.model.CreateContactRequest;
-import com.sleepy4k.practice.model.SearchContactRequest;
-import com.sleepy4k.practice.model.UpdateContactRequest;
 import com.sleepy4k.practice.repository.ContactRepository;
+import com.sleepy4k.practice.request.CreateContactRequest;
+import com.sleepy4k.practice.request.SearchContactRequest;
+import com.sleepy4k.practice.request.UpdateContactRequest;
+import com.sleepy4k.practice.service.ValidationService;
 
 import jakarta.transaction.Transactional;
 import jakarta.persistence.criteria.Predicate;
