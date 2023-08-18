@@ -1,7 +1,8 @@
-package com.sleepy4k.practice.controller;
+package com.sleepy4k.practice.controller.api;
 
 import org.springframework.http.MediaType;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,31 +20,33 @@ import com.sleepy4k.practice.entity.User;
 import com.sleepy4k.practice.model.WebResponse;
 import com.sleepy4k.practice.model.PagingResponse;
 import com.sleepy4k.practice.model.ContactResponse;
-import com.sleepy4k.practice.service.ContactService;
-import com.sleepy4k.practice.model.CreateContactRequest;
-import com.sleepy4k.practice.model.SearchContactRequest;
-import com.sleepy4k.practice.model.UpdateContactRequest;
+import com.sleepy4k.practice.service.api.ContactService;
+import com.sleepy4k.practice.request.CreateContactRequest;
+import com.sleepy4k.practice.request.SearchContactRequest;
+import com.sleepy4k.practice.request.UpdateContactRequest;
 
 @RestController
+@Component("APIContactController")
+@RequestMapping("/api/contacts")
 public class ContactController {
   @Autowired
   private ContactService contactService;
 
-  @PostMapping(path = "/api/contacts", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public WebResponse<ContactResponse> create(User user, @RequestBody CreateContactRequest request) {
     ContactResponse contactResponse = contactService.create(user, request);
 
     return WebResponse.<ContactResponse>builder().data(contactResponse).build();
   }
 
-  @GetMapping(path = "/api/contacts/{id_contact}", produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(path = "/{id_contact}", produces = MediaType.APPLICATION_JSON_VALUE)
   public WebResponse<ContactResponse> get(User user, @PathVariable("id_contact") String id) {
     ContactResponse contactResponse = contactService.get(user, id);
 
     return WebResponse.<ContactResponse>builder().data(contactResponse).build();
   }
 
-  @PutMapping(path = "/api/contacts/{id_contact}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @PutMapping(path = "/{id_contact}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public WebResponse<ContactResponse> update(User user, @RequestBody UpdateContactRequest request, @PathVariable("id_contact") String id) {
     request.setId(id);
 
@@ -51,14 +55,14 @@ public class ContactController {
     return WebResponse.<ContactResponse>builder().data(contactResponse).build();
   }
 
-  @DeleteMapping(path = "/api/contacts/{id_contact}", produces = MediaType.APPLICATION_JSON_VALUE)
+  @DeleteMapping(path = "/{id_contact}", produces = MediaType.APPLICATION_JSON_VALUE)
   public WebResponse<String> delete(User user, @PathVariable("id_contact") String id) {
     contactService.delete(user, id);
 
     return WebResponse.<String>builder().data("OK").build();
   }
 
-  @GetMapping(path = "/api/contacts", produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public WebResponse<List<ContactResponse>> search(
     User user,
     @RequestParam(value = "name", required = false) String name,

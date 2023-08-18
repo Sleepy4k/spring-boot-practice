@@ -1,16 +1,18 @@
-package com.sleepy4k.practice.controller;
+package com.sleepy4k.practice.controller.api;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.sleepy4k.practice.model.WebResponse;
 
 import jakarta.validation.ConstraintViolationException;
 
 @RestControllerAdvice
+@Component("APIErrorController")
 public class ErrorController {
   @ExceptionHandler(ConstraintViolationException.class)
   public ResponseEntity<WebResponse<String>> constraintViolationException(ConstraintViolationException exception) {
